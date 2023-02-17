@@ -1,11 +1,10 @@
 <?php
 
-namespace Tests\Unit\Helpers;
+namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
-use App\Helpers\Email;
 
-class EmailTest extends TestCase
+class FunctionsTest extends TestCase
 {
     /**
      * A basic unit test example.
@@ -14,10 +13,10 @@ class EmailTest extends TestCase
      */
     public function testEmail()
     {
-        $result = Email::validate('i@admin.com');
+        $result = validate_email('i@admin.com');
         $this->assertTrue($result);
 
-        $result = Email::validate('i@@admin.com');
+        $result = validate_email('i@@admin.com');
         $this->assertFalse($result);
     }
 }
