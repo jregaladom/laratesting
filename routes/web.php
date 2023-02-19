@@ -1,7 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Http\Request;
+use App\Http\Controllers\ProfileController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,3 +22,7 @@ Route::get('/', function () {
 Route::get('about', function () {
     return 'about';
 });
+
+
+Route::view('profile', 'profile');
+Route::post('profile', [ProfileController::class, 'upload'])->name('profile');

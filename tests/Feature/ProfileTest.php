@@ -19,11 +19,20 @@ class ProfileTest extends TestCase
     {
         Storage::fake('local');
         $response = $this->post('profile', [
-            'file' => $photo = UploadedFile::fake()->image('photo.jpg')
+            'photo' => $photo = UploadedFile::fake()->image('photo.png')
         ]);
 
-        Storage::disk('local')->assertExists('profiles/' . $photo->hashName());
+        Storage::disk('local')->assertExists("profiles/{$photo->hashName()}");
 
         $response->assertRedirect('profile');
+    }
+
+    public function test_photo_required()
+    {
+        $response = $this->post('profile', [
+            'photo' => ''
+        ]);
+
+        $response->assertSessionHasErrors('photo');
     }
 }
